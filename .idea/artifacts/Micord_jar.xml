@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Micord:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Micord_jar</output-path>
+    <root id="archive" name="Micord.jar">
+      <element id="module-output" name="Micord" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/Dev server/JDA-4.2.0_168-withDependencies.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
