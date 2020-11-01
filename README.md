@@ -5,6 +5,8 @@
 - Send Discord Messages In Minecraft Server
 - Send Player Activity To Discord (Player Join Server, Player Death, Player Leave Server)
 
+[Spigot Resource](https://www.spigotmc.org/resources/micord.85404/)
+
 # Installation
 ## Creating Bot
 1. Create Bot and Inviting it with [this tutorial](https://discordpy.readthedocs.io/en/latest/discord.html)
