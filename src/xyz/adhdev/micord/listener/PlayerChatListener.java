@@ -11,7 +11,14 @@ import java.io.IOException;
 public class PlayerChatListener implements Listener {
     @EventHandler
     public void OnPlayerChat(AsyncPlayerChatEvent e) throws IOException {
-        String message = e.getMessage();
+        String message = "";
+        if(Main.plugin.getConfig().getBoolean("Block @everyone and @here")){
+            message = e.getMessage()
+                    .replace("@everyone", "(at)everyone")
+                    .replace("@here", "(at)here");
+        }else{
+            message = e.getMessage();
+        }
         String username = e.getPlayer().getDisplayName();
         String avatar = "https://cravatar.eu/helmavatar/"+username+"/190.png";
         DiscordWebhook webhook = new DiscordWebhook(Main.plugin.getConfig().getString("Discord Webhook"));

@@ -71,6 +71,13 @@ public class Main extends JavaPlugin {
         console.log("§b§lMicord Disabled");
     }
 
+//    public void updateConfig() {
+//        if(config.getInt("Version") < 2){
+//            config.addDefault("Block @everyone and @here", false);
+//            config.set("Version", 2);
+//        }
+//    }
+
     public void createConfig() {
         try {
             if(!getDataFolder().exists()) {
@@ -81,6 +88,7 @@ public class Main extends JavaPlugin {
             if (!file.exists()) {
                 console.log("Config.yml Not Found, Creating");
                 config.addDefault("Channel ID", "653102403725426701");
+                config.addDefault("Block @everyone and @here", false);
                 config.addDefault("Discord Bot Token", "NTk1ODMF4kejkyOTkz.1Ns3rT.Y0ur.t0K3n.eMHaM3wYFCf9fE");
                 config.addDefault("Discord Webhook", "https://discordapp.com/api/webhooks/insertyourdiscordwebhook");
                 config.addDefault("Discord Chat Format", "&b&l[Discord] &r<{userTag}> {userMessage}");
@@ -96,7 +104,7 @@ public class Main extends JavaPlugin {
                 config.addDefault("Leave Bot Name", "Leave Notification");
                 config.addDefault("Leave Bot Avatar", "https://i.ibb.co/CwvByzp/a-4a2d4c71d0ec0c7f72792d7280a6529d.webp");
                 config.addDefault("Leave Message", "{username} left the game");
-                config.addDefault("Version", "1.0");
+                config.addDefault("Version", 2);
                 config.options().copyDefaults(true);
                 saveConfig();
                 this.getConfig();
