@@ -17,6 +17,7 @@ public class Main extends JavaPlugin {
     public static Main plugin;
     @Override
     public void onEnable() {
+        updateConfig();
         createConfig();
         if(config.getString("Discord Bot Token").equalsIgnoreCase("NTk1ODMF4kejkyOTkz.1Ns3rT.Y0ur.t0K3n.eMHaM3wYFCf9fE")){
             console.log("§c§lMicord §r> Please Set Your Discord Token");
@@ -41,9 +42,7 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
         }
         DiscordWebhook webhook = new DiscordWebhook(config.getString("Discord Webhook"));
-        webhook.setContent("Micord Activated!");
-        webhook.setAvatarUrl("https://i.ibb.co/CwvByzp/a-4a2d4c71d0ec0c7f72792d7280a6529d.webp");
-        webhook.setUsername("Micord");
+        webhook.setContent(config.getString("Micord connected message"));
         try {
             webhook.execute();
         } catch (IOException e) {
@@ -60,9 +59,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         DiscordWebhook webhook = new DiscordWebhook(config.getString("Discord Webhook"));
-        webhook.setContent("Micord Deactivated!");
-        webhook.setAvatarUrl("https://i.ibb.co/CwvByzp/a-4a2d4c71d0ec0c7f72792d7280a6529d.webp");
-        webhook.setUsername("Micord");
+        webhook.setContent(config.getString("Micord disconnected message"));
         try {
             webhook.execute();
         } catch (IOException e) {
@@ -71,12 +68,16 @@ public class Main extends JavaPlugin {
         console.log("§b§lMicord Disabled");
     }
 
-//    public void updateConfig() {
-//        if(config.getInt("Version") < 2){
-//            config.addDefault("Block @everyone and @here", false);
-//            config.set("Version", 2);
-//        }
-//    }
+    public void updateConfig() {
+        if(config.getInt("Version") < 3){
+            console.log("§b§lMicord §r> Updating Micord");
+            config.addDefault("Micord connected message", "Micord Connected");
+            config.addDefault("Micord disconnected message", "Micord Disconnected");
+            config.set("Version", 3);
+            config.options().copyDefaults(true);
+            saveConfig();
+        }
+    }
 
     public void createConfig() {
         try {
@@ -88,6 +89,8 @@ public class Main extends JavaPlugin {
             if (!file.exists()) {
                 console.log("Config.yml Not Found, Creating");
                 config.addDefault("Channel ID", "653102403725426701");
+                config.addDefault("Micord connected message", "Micord Connected");
+                config.addDefault("Micord disconnected message", "Micord Disconnected");
                 config.addDefault("Block @everyone and @here", false);
                 config.addDefault("Discord Bot Token", "NTk1ODMF4kejkyOTkz.1Ns3rT.Y0ur.t0K3n.eMHaM3wYFCf9fE");
                 config.addDefault("Discord Webhook", "https://discordapp.com/api/webhooks/insertyourdiscordwebhook");
@@ -104,7 +107,7 @@ public class Main extends JavaPlugin {
                 config.addDefault("Leave Bot Name", "Leave Notification");
                 config.addDefault("Leave Bot Avatar", "https://i.ibb.co/CwvByzp/a-4a2d4c71d0ec0c7f72792d7280a6529d.webp");
                 config.addDefault("Leave Message", "{username} left the game");
-                config.addDefault("Version", 2);
+                config.addDefault("Version", 3);
                 config.options().copyDefaults(true);
                 saveConfig();
                 this.getConfig();
